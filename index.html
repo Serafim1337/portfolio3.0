@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  <link href="style.css" rel="stylesheet">
+  <link rel="icon" href="assets/png/favicon.png">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-container">
+      <div class="header-logo">
+        <img src="assets/png/logo.png" alt="logo image" class="logo-image">
+      </div>
+      <div class="header-links">
+        <nav>
+          <ul class="navigation-list">
+            <li><a href="#skills-id">Skills</a></li>
+            <li><a href="#portfolio-id">Portfolio</a></li>
+            <li><a href="#video-id">Video</a></li>
+            <li><a href="#price-id">Price</a></li>
+            <li><a href="#contacts-id">Contacts</a></li>
+          </ul>
+        </nav>
+        <div class="switch-lang">
+          <a href="#">en</a>
+          <span>/</span>
+          <a href="#">ru</a>   
+        </div>       
+        <div class="burger-menu" onclick="menuFunction()">
+          <button id="menu-id" class="menu" onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))" aria-label="Main Menu">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+              <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+              <path class="line line2" d="M 20,50 H 80" />
+              <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+            </svg>
+        </div>
+      </div> 
+    </div>
+    <div class="adaptive-menu" id="menu-bg">
+      <nav id="adaptive-menu-nav">
+        <ul class="adaptive-menu-list">
+          <li><a href="#skills-id" onclick="menuLinksFunction();menuFunction()">Skills</a></li>
+          <li><a href="#portfolio-id" onclick="menuLinksFunction();menuFunction()">Portfolio</a></li>
+          <li><a href="#video-id" onclick="menuLinksFunction();menuFunction()">Video</a></li>
+          <li><a href="#price-id" onclick="menuLinksFunction();menuFunction()">Price</a></li>
+          <li><a href="#contacts-id" onclick="menuLinksFunction();menuFunction()">Contacts</a></li> 
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="main">
+    <section class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-section-content">
+        <h1 class="header-color-white">Alexa Rise</h1>
+        <p>Save sincere emotions, romantic feelings and
+happy moments of life together with professional
+photographer Alexa Rise</p>
+        <a href="#" class="hire-link" target="_blank">Hire me</a>
+      </div>
+      </div>
+    </section>
+
+    <section class="skills-section" id="skills-id">
+      <div class="container skills-container">
+        <div class="section-title" id="title-id">
+          <h2><span class="title-text">Skills</span></h2>
+        </div>
+        <div class="skills-section-content">
+          <div class="skill-card">
+            <img src="assets/png/camera.png" alt="skill image">
+            <h4 class="header-color-white">Digital photography</h4>
+            <pre>High-quality photos in the studio
+and on the nature</pre>
+          </div>
+          <div class="skill-card">
+            <img src="assets/png/video.png" alt="skill image">
+            <h4 class="header-color-white">Video shooting</h4>
+            <pre>Capture your moments so that
+they always stay with you</pre>
+          </div>
+          <div class="skill-card">
+            <img src="assets/png/photo.png" alt="skill image">
+            <h4 class="header-color-white">Retouch</h4>
+            <pre>I strive to make photography
+surpass reality</pre>
+          </div>
+          <div class="skill-card">
+            <img src="assets/png/mic.png" alt="skill image">
+            <h4 class="header-color-white">Audio</h4>
+            <pre>Professional sounds recording
+for video, advertising, portfolio</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-section" id="portfolio-id">
+      <div class="container portfolio-container">
+        <div class="section-title">
+          <h2><span class="title-text">Portfolio</span></h2>
+        </div>
+        <div class="button-block">
+          <button type="button" class="button">Winter</button>
+          <button type="button" class="button">Spring</button>
+          <button type="button" class="button">Summer</button>
+          <button type="button" class="button">Autumn</button>
+        </div>
+        <div class="photos">
+          <img src="assets/img/portfolio-img1.jpg" alt="portfolio img">
+          <img src="assets/img/portfolio-img2.jpg" alt="portfolio img">
+          <img src="assets/img/portfolio-img3.jpg" alt="portfolio img">
+          <img src="assets/img/portfolio-img4.jpg" alt="portfolio img">
+          <img src="assets/img/portfolio-img5.jpg" alt="portfolio img">
+          <img src="assets/img/portfolio-img6.jpg" alt="portfolio img">
+        </div>
+      </div>
+    </section>
+
+    <section class="video-section" id="video-id">
+      <div class="container video-container">
+        <div class="section-title">
+          <h2><span class="title-text">Video</span></h2>
+        </div>
+        <div class="video-player">
+        <img src="assets/img/video-img.jpg" alt="video player image" class="video">
+        <!-- <img src="assets/png/play.png" alt="play image" class="play-button"> -->
+        </div>
+      </div>
+    </section>
+
+    <section class="price-section" id="price-id">
+      <div class="container price-cantainer">
+        <div class="section-title">
+          <h2><span class="title-text">Price</span></h2>
+        </div>
+        <div class="price-section-content">
+          <div class="price-card">
+            <h3 class="header-color-white">Standart</h3>
+            <div class="card-description">
+              <label class="price-amount">500 $</label>
+              <p>One location</p>
+              <p>120 photos in color</p>
+              <p>12 photos in retouch</p>
+              <p>Readiness 2-3 weeks</p>
+              <p>Make up, visage</p>
+            </div>
+            <button type="button" class="card-button">Order shooting</button>
+          </div>
+          <div class="price-card">
+            <h3 class="header-color-white">Premium</h3>
+            <div class="card-description">
+              <label class="price-amount">700 $</label>
+              <p>One or two locations</p>
+              <p>200 photos in color</p>
+              <p>20 photos in retouch</p>
+              <p>Readiness 1-2 weeks</p>
+              <p>Make up, visage</p>
+            </div>
+            <button type="button" class="card-button">Order shooting</button>
+          </div>
+          <div class="price-card">
+            <h3 class="header-color-white">Gold</h3>
+            <div class="card-description">
+              <label class="price-amount">1000 $</label>
+              <p>Tree locations or more</p>
+              <p>300 photos in color</p>
+              <p>50 photos in retouch</p>
+              <p>Readiness 1 weeks</p>
+              <p>Make up, visage, hairstyle</p>
+            </div>
+            <button type="button" class="card-button">Order shooting</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contacts-section" id="contacts-id">
+      <div class="container contacts-container">
+        <div class="contacts-section-content">
+          <h2>Contact me</h2>
+          <input type="text" placeholder="E-mail" class="contacts-input">
+          <input type="tel" placeholder="Phone" class="contacts-input">
+          <textarea placeholder="Message" class="contacts-textarea"></textarea>
+          <button type="button" class="contacts-button">Send message</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="credits">
+        <a href="#" target="_blank"><p class="elements elem1">© 2022 github</p></a>
+      </div>
+      <div class="rs-name">
+        <a href="#" target="_blank"><p class="rs-description">Rolling Scopes School</p></a>
+      </div>
+      <div class="socials">
+        <ul class="socials-list">
+          <li><a href="#"><img src="assets/png/instagram.png" alt="socials image" class="socials-image"></a></li>
+          <li><a href="#"><img src="assets/png/fb.png" alt="socials image" class="socials-image"></a></li>
+          <li><a href="#"><img src="assets/png/twitter.png" alt="socials image" class="socials-image"></a></li>
+          <li><a href="#"><img src="assets/png/pinterest.png" alt="socials image" class="socials-image"></a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
