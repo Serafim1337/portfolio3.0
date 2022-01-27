@@ -371,6 +371,22 @@ h4 {
   color: var(--black);
 }
 
+.portfolio-photos-animation {
+  display: block;
+  animation: showImg 0.5s linear forwards;
+}
+
+@keyframes showImg {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .photos {
   margin: 0 20px;
   display: flex;
@@ -931,6 +947,12 @@ box-sizing: border-box;
   .photos img {
     width: 100%;
     height: auto;
+  }
+
+  @keyframes showImg {
+    0% {
+      transform: translateY(-20px);
+    }
   }
 
   /*!contacts section */

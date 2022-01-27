@@ -69,9 +69,20 @@ function buttonClickHandler(event) {
   }
 
   let imageCounter = 0;
+  let animationDuration;
+
   for(let image of portfolioImages) {
     imageCounter++;
-    image.src = `assets/img/${event.target.dataset.seasonType}/${imageCounter}.jpg`
+    image.src = `assets/img/${event.target.dataset.seasonType}/${imageCounter}.jpg`;
+    image.classList.add('portfolio-photos-animation');
+    animationDuration = parseFloat(window.getComputedStyle(image).animationDuration) * 1000;
   }
 
+  setTimeout(removeAnimation, animationDuration);
+}
+
+function removeAnimation () {
+  for(image of portfolioImages) {
+    image.classList.remove('portfolio-photos-animation');
+  }
 }
