@@ -365,7 +365,7 @@ h4 {
   transition: var(--transition-default);
 }
 
-.button:hover {
+.button:hover, .button-active {
   cursor: pointer;
   background-color: var(--gold);
   color: var(--black);

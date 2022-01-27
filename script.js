@@ -1,3 +1,4 @@
+// adaptive menu functions
 function menuFunction() {
   document.querySelector('.adaptive-menu').classList.toggle('active');
   document.querySelector('.adaptive-menu-list').classList.toggle('active');
@@ -11,16 +12,18 @@ function menuFunction() {
   }
 }
 
+function menuLinksFunction() {
+  let element = document.querySelector('#menu-id');
+  element.classList.toggle('opened');
+}
+
+// function hiding section titles while adaptive menu is active
 function titleHideFunction() {
   document.querySelector('.section-title').classList.toggle('hidden');
   document.querySelector('.skills-section-content').classList.toggle('menu-view-adaption');
 }
 
-function menuLinksFunction() {
-  let element = document.querySelector('#menu-id');
-  element.classList.toggle('opened');
-  
-}
+// function closing menu by clicking on free space
 
 document.querySelector('#menu-bg').addEventListener('click', bgHandler);
 
@@ -30,4 +33,45 @@ function bgHandler (event) {
     document.querySelector('#menu-id').classList.toggle('opened');
     document.querySelector('#menu-id').setAttribute('area-expanded',false);
   }
+}
+
+// changing images in portfolio section 
+
+document.querySelector('.button[data-season-type="autumn"]').classList.add('button-active');
+
+(function () {
+  for(let i = 0; i < 6;i++) {
+    let imgSpring = new Image();
+    let imgSummer = new Image();
+    let imgWinter = new Image();
+    imgSpring.src = `assets/img/spring/${i+1}.jpg`;
+    imgSummer.src = `assets/img/summer/${i+1}.jpg`;
+    imgWinter.src = `assets/img/winter/${i+1}.jpg`;
+  }
+})(); //Immediately Invoked Function (IIFE) to preload all images
+
+const buttons = document.querySelectorAll('.button');
+const portfolioImages = document.querySelectorAll('.portfolio-photo');
+
+for(let button of buttons) {
+  button.addEventListener('click', buttonClickHandler);
+}
+
+function buttonClickHandler(event) {
+  event.target.classList.add('button-active'); 
+
+  for(let button of buttons) {
+    if(button === event.target) {
+      continue;
+    } else {
+      button.classList.remove('button-active');
+    }
+  }
+
+  let imageCounter = 0;
+  for(let image of portfolioImages) {
+    imageCounter++;
+    image.src = `assets/img/${event.target.dataset.seasonType}/${imageCounter}.jpg`
+  }
+
 }
