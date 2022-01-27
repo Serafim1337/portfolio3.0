@@ -48,7 +48,9 @@ document.querySelector('.button[data-season-type="autumn"]').classList.add('butt
     imgSummer.src = `assets/img/summer/${i+1}.jpg`;
     imgWinter.src = `assets/img/winter/${i+1}.jpg`;
   }
-})(); //Immediately Invoked Function (IIFE) to preload all images
+  const svgThemeSwitcher = new Image();
+  svgThemeSwitcher.src = `assets/svg/dark-theme.svg`
+})();    //Immediately Invoked Function (IIFE) to preload all images
 
 const buttons = document.querySelectorAll('.button');
 const portfolioImages = document.querySelectorAll('.portfolio-photo');
@@ -86,3 +88,21 @@ function removeAnimation () {
     image.classList.remove('portfolio-photos-animation');
   }
 }
+
+//light-dark theme switching
+
+const themeSwitcher = document.querySelector('.theme-switcher');
+
+themeSwitcher.addEventListener('click', themeSwitcherHandler);
+
+function themeSwitcherHandler() {
+
+  if(themeSwitcher.src.includes('light')) {
+    themeSwitcher.src = 'assets/svg/dark-theme.svg'
+    return;
+  } else {
+    themeSwitcher.src = 'assets/svg/light-theme.svg'
+  } 
+
+}
+

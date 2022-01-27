@@ -200,6 +200,19 @@ h4 {
   margin: 0 9px;
 }
 
+.switch-theme {
+  margin-left: 35px;
+}
+
+.theme-switcher {
+  transition: var(--transition-default);
+}
+
+.theme-switcher:hover {
+  cursor: pointer;
+  filter: invert(74%) sepia(23%) saturate(432%) hue-rotate(7deg) brightness(91%) contrast(86%);
+}
+
 /*! adaptive menu  */
 
 .burger-menu {
@@ -718,6 +731,10 @@ box-sizing: border-box;
     display: flex;
     width: 50px;
     margin-right: 60px;
+  }
+
+  .switch-theme {
+    margin: 0 30px;
   }
 
   /*!burger menu   */
