@@ -1,4 +1,6 @@
+import i18Obj from './translate.js';
 //!-------------------------------------------------------- adaptive menu functions
+document.querySelector('.burger-menu').addEventListener('click', menuFunction);
 function menuFunction() {
   document.querySelector('.adaptive-menu').classList.toggle('active');
  switch (currentTheme) {
@@ -18,6 +20,12 @@ function menuFunction() {
   setTimeout(titleHideFunction,200);
   }
 }
+
+const menuLinks = document.querySelectorAll('.adaptive-menu-list a');
+menuLinks.forEach((link) => {
+  link.addEventListener('click', menuLinksFunction);
+  link.addEventListener('click', menuFunction);
+})
 
 function menuLinksFunction() {
   let element = document.querySelector('#menu-id');
@@ -55,9 +63,16 @@ document.querySelector('.button[data-season-type="autumn"]').classList.add('butt
     imgSummer.src = `assets/img/summer/${i+1}.jpg`;
     imgWinter.src = `assets/img/winter/${i+1}.jpg`;
   }
+
   const svgThemeSwitcher = new Image();
-  svgThemeSwitcher.src = `assets/svg/dark-theme.svg`
-})();    //Immediately Invoked Function (IIFE) to preload all images
+  svgThemeSwitcher.src = `assets/svg/dark-theme.svg`;
+
+  const heroBgLight = new Image();
+  heroBgLight.src = `assets/img/hero-bg-light.jpg`;
+
+  const contactsBgLight = new Image();
+  contactsBgLight.src = `assets/img/contacts-bg-light.jpg`;
+})();    //!Immediately Invoked Function (IIFE) to preload all images
 
 const buttons = document.querySelectorAll('.button');
 const portfolioImages = document.querySelectorAll('.portfolio-photo');
@@ -98,7 +113,7 @@ function buttonClickHandler(event) {
 }
 
 function removeAnimation () {
-  for(image of portfolioImages) {
+  for(let image of portfolioImages) {
     image.classList.remove('portfolio-photos-animation');
   }
 }
@@ -258,5 +273,35 @@ function darkThemeFunction() {
   const footer = document.querySelector('.footer-light');
   footer.classList.remove('footer-light');
   footer.classList.add('footer');
+}
+
+//!-------------------------------- translate language functions
+
+let currentLanguage;
+
+document.querySelector('#en-lang').addEventListener('click', switchLangHandler);
+document.querySelector('#ru-lang').addEventListener('click', switchLangHandler);
+
+function switchLangHandler (event) {
+  switch(event.target.id) {
+   case 'en-lang': 
+   currentLanguage = 'en';
+   getTranslation(currentLanguage);
+   break;
+   case 'ru-lang': 
+   currentLanguage = 'ru';
+   getTranslation(currentLanguage);
+   break;
+  }
+}
+
+function getTranslation (currentLanguage) {
+  const textElements = document.querySelectorAll('[data-i18n]');
+  textElements.forEach((element) => {
+    element.textContent = `${i18Obj[currentLanguage][element.dataset.i18n]}`;
+    if(element.placeholder) {
+      element.placeholder = `${i18Obj[currentLanguage][element.dataset.i18n]}`;
+    }
+  })
 }
 

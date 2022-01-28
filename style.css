@@ -103,7 +103,7 @@ h4 {
   padding: 0;
 }
 
-.navigation-list-light a, .switch-lang-light a, .switch-lang-light span{
+.navigation-list-light a, .switch-lang-light p, .switch-lang-light span{
   text-decoration: none;
   font-family: var(--ff-text);
   font-size: var(--fs-medium);
@@ -113,8 +113,9 @@ h4 {
   transition: var(--transition-default);
 }
 
-.navigation-list-light a:hover, .switch-lang-light a:hover {
+.navigation-list-light a:hover, .switch-lang-light p:hover {
   color: var(--white);
+  cursor: pointer;
 }
 
 .navigation-list-light li {
@@ -126,7 +127,7 @@ h4 {
   margin-left: 31px;
 }
 
-.switch-lang-light a {
+.switch-lang-light p {
   margin: 0 9px;
 }
 
@@ -303,7 +304,7 @@ h4 {
   padding: 0;
 }
 
-.navigation-list a, .switch-lang a, .switch-lang span{
+.navigation-list a, .switch-lang p, .switch-lang span{
   text-decoration: none;
   font-family: var(--ff-text);
   font-size: var(--fs-medium);
@@ -313,8 +314,9 @@ h4 {
   transition: var(--transition-default);
 }
 
-.navigation-list a:hover, .switch-lang a:hover {
+.navigation-list a:hover, .switch-lang p:hover {
   color: var(--gold);
+  cursor: pointer;
 }
 
 .navigation-list li {
@@ -326,7 +328,7 @@ h4 {
   margin-left: 31px;
 }
 
-.switch-lang a {
+.switch-lang p {
   margin: 0 9px;
 }
 
@@ -454,6 +456,7 @@ h4 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  row-gap: 60px;
   margin: 60px 20px 0px 20px;
 }
 
