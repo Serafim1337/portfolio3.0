@@ -174,6 +174,12 @@ function lightThemeFunction() {
   const switchLang = document.querySelector('.switch-lang') || document.querySelector('.switch-lang-light');
   switchLang.classList.remove('switch-lang');
   switchLang.classList.add('switch-lang-light');
+  const switchers  = switchLang.children;
+  for(let elem of switchers) {
+    if(elem.style.color === 'var(--gold)') {
+      elem.style.color = 'var(--white)';
+    }
+  }
 
   document.querySelector('.logo-image').src = 'assets/png/logo-dark.png';
   document.querySelector('.logo-image').style.height = '50px';
@@ -242,6 +248,12 @@ function darkThemeFunction() {
   const switchLang = document.querySelector('.switch-lang-light');
   switchLang.classList.remove('switch-lang-light');
   switchLang.classList.add('switch-lang');
+  const switchers  = switchLang.children;
+  for(let elem of switchers) {
+    if(elem.style.color === 'var(--white)') {
+      elem.style.color = 'var(--gold)';
+    }
+  }
 
   document.querySelector('.logo-image').src = 'assets/png/logo.png';
   document.querySelector('.logo-image').style.height = '';
@@ -281,18 +293,57 @@ function darkThemeFunction() {
 
 //!-------------------------------- translate language functions
 
-document.querySelector('#en-lang').addEventListener('click', switchLangHandler);
-document.querySelector('#ru-lang').addEventListener('click', switchLangHandler);
+const enLangSwitcher = document.querySelector('#en-lang');
+const ruLangSwitcher = document.querySelector('#ru-lang');
+enLangSwitcher.addEventListener('click', switchLangHandler);
+ruLangSwitcher.addEventListener('click', switchLangHandler);
+
+if(currentTheme === 'light') {
+  switch(currentLanguage) {
+    case 'en': 
+    enLangSwitcher.style.color = 'green';
+    ruLangSwitcher.style.color = '';
+    break;
+    case 'ru': 
+    enLangSwitcher.style.color = '';
+    ruLangSwitcher.style.color = 'green';
+    break;
+  }
+}
 
 function switchLangHandler (event) {
   switch(event.target.id) {
    case 'en-lang': 
    currentLanguage = 'en';
    getTranslation(currentLanguage);
+
+   switch(currentTheme) {
+    case 'light': 
+    enLangSwitcher.style.color = 'var(--white)';
+    ruLangSwitcher.style.color = '';
+    break;
+    case 'dark': 
+    enLangSwitcher.style.color = 'var(--gold)';
+    ruLangSwitcher.style.color = '';
+    break;
+   }
    break;
+
    case 'ru-lang': 
    currentLanguage = 'ru';
    getTranslation(currentLanguage);
+
+   switch(currentTheme) {
+    case 'light': 
+    enLangSwitcher.style.color = '';
+    ruLangSwitcher.style.color = 'var(--white)';
+    break;
+    case 'dark': 
+    enLangSwitcher.style.color = '';
+    ruLangSwitcher.style.color = 'var(--gold)';
+    break;
+   }
+
    break;
   }
 }
@@ -372,6 +423,34 @@ function getLocalStorage () {
 }
 
 function preloadLanguage (language) {
+
+switch(language) {
+  case 'en':
+    switch(currentTheme) {
+      case 'light': 
+      enLangSwitcher.style.color = 'var(--white)';
+      ruLangSwitcher.style.color = '';
+      break;
+      case 'dark': 
+      enLangSwitcher.style.color = 'var(--gold)';
+      ruLangSwitcher.style.color = '';
+      break;
+     }
+  break;
+  case 'ru':
+    switch(currentTheme) {
+      case 'light': 
+      enLangSwitcher.style.color = '';
+      ruLangSwitcher.style.color = 'var(--white)';
+      break;
+      case 'dark': 
+      enLangSwitcher.style.color = '';
+      ruLangSwitcher.style.color = 'var(--gold)';
+      break;
+     }
+  break;
+}
+
   const textElements = document.querySelectorAll('[data-i18n]');
   textElements.forEach((element) => {
     element.textContent = `${i18Obj[language][element.dataset.i18n]}`;

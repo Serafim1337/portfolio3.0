@@ -118,6 +118,14 @@ h4 {
   cursor: pointer;
 }
 
+.current-lang-active {
+  color: var(--gold);
+}
+
+.current-lang-active-light {
+  color: var(--white);
+}
+
 .navigation-list-light li {
   margin-left: 30px;
 }
