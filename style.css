@@ -882,6 +882,9 @@ box-sizing: border-box;
     box-shadow: 0 0.5em 0.5em -0.4em var(--gold);
     transform: translateY(-0.1em);
   }
+
+  
+
 }
 
 /*!---------------------------media queries  <768px*/
@@ -995,6 +998,7 @@ box-sizing: border-box;
 
   .adaptive-menu.active {
     top: 0;
+    width: 100%;
   }
 
   .adaptive-menu-list.active  {
@@ -1004,6 +1008,8 @@ box-sizing: border-box;
   .adaptive-menu-list-light.active  {
     display: block;
   }
+
+ 
 
   /*!hero section  */
 
