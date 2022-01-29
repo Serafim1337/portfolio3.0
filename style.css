@@ -443,7 +443,6 @@ h4 {
 
 .animated-button {
   overflow: hidden;
-  position: relative;
 }
 
 .animated-button:focus {
@@ -848,6 +847,35 @@ box-sizing: border-box;
   }
 }
 
+@media (max-width: 900px) {
+   /*!animated buttons  */
+
+   .animated-button .circle {
+    position: absolute;
+    background-color: var(--white);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: scale 0.5s ease-out;
+  }
+  
+  @keyframes scale {
+    to {
+      transform: translate(-50%, -50%) scale(3);
+      opacity: 0;
+    }
+  }
+  
+  .animated-button:hover {
+    color: var(--white);
+    cursor: pointer;
+    transition:0.25s; 
+    box-shadow: 0 0.5em 0.5em -0.4em var(--gold);
+    transform: translateY(-0.1em);
+  }
+}
+
 /*!---------------------------media queries  <768px*/
 
 @media (max-width: 768px) {
@@ -876,7 +904,7 @@ box-sizing: border-box;
 
   .section-title.hidden {
     display: none;
-  }
+  } 
   
   /*!header  */
 

@@ -1,4 +1,8 @@
 import i18Obj from './translate.js';
+
+let currentTheme = 'dark';
+let currentLanguage = 'en';
+
 //!-------------------------------------------------------- adaptive menu functions
 document.querySelector('.burger-menu').addEventListener('click', menuFunction);
 function menuFunction() {
@@ -120,8 +124,6 @@ function removeAnimation () {
 
 //!------------------------------light-dark theme switching
 
-let currentTheme = 'dark';
-
 const themeSwitcher = document.querySelector('.theme-switcher');
 
 themeSwitcher.addEventListener('click', themeSwitcherHandler);
@@ -145,6 +147,8 @@ function lightThemeFunction() {
 
   currentTheme = 'light';
 
+ 
+  
   document.body.style.backgroundColor = 'var(--white)';
 
   document.querySelector('.hero-container').style.backgroundImage = 'url(assets/img/hero-bg-light.jpg)';
@@ -154,11 +158,11 @@ function lightThemeFunction() {
     textElement.style.color = '#000000';
   }
 
-  const navList = document.querySelector('.navigation-list');
+  const navList = document.querySelector('.navigation-list') ||document.querySelector('.navigation-list-light');
   navList.classList.remove('navigation-list');
   navList.classList.add('navigation-list-light');
 
-  const menuList = document.querySelector('.adaptive-menu-list');
+  const menuList = document.querySelector('.adaptive-menu-list') || document.querySelector('.adaptive-menu-list-light');
   menuList.classList.remove('adaptive-menu-list');
   menuList.classList.add('adaptive-menu-list-light');
   
@@ -167,7 +171,7 @@ function lightThemeFunction() {
     line.style.stroke = 'var(--black)';
   }
 
-  const switchLang = document.querySelector('.switch-lang');
+  const switchLang = document.querySelector('.switch-lang') || document.querySelector('.switch-lang-light');
   switchLang.classList.remove('switch-lang');
   switchLang.classList.add('switch-lang-light');
 
@@ -190,7 +194,7 @@ function lightThemeFunction() {
     input.classList.remove('contacts-input');
     input.classList.add('contacts-input-light');
   }
-  const textArea = document.querySelector('.contacts-textarea');
+  const textArea = document.querySelector('.contacts-textarea') ||document.querySelector('.contacts-textarea-light');
   textArea.classList.remove('contacts-textarea');
   textArea.classList.add('contacts-textarea-light')
 
@@ -202,7 +206,7 @@ function lightThemeFunction() {
     i++;
   }
 
-  const footer = document.querySelector('.footer');
+  const footer = document.querySelector('.footer') || document.querySelector('.footer-light');
   footer.classList.remove('footer');
   footer.classList.add('footer-light');
 }
@@ -277,8 +281,6 @@ function darkThemeFunction() {
 
 //!-------------------------------- translate language functions
 
-let currentLanguage;
-
 document.querySelector('#en-lang').addEventListener('click', switchLangHandler);
 document.querySelector('#ru-lang').addEventListener('click', switchLangHandler);
 
@@ -332,5 +334,49 @@ function animatedButtonHandler(e) {
   setTimeout(() => circle.remove(), 500);
 }
 
+//!----------------------------- saving user settings in local storage  
 
+window.addEventListener('beforeunload', setLocalStorage);
+window.addEventListener('load', getLocalStorage);
 
+function setLocalStorage () {
+  localStorage.setItem('currentLanguage', currentLanguage);
+  localStorage.setItem('currentTheme', currentTheme);
+}
+
+function getLocalStorage () {
+  if(localStorage.getItem('currentLanguage')) {
+    const lang = localStorage.getItem('currentLanguage');
+    currentLanguage = lang;
+
+    switch(currentLanguage) {
+      case 'en': 
+      preloadLanguage('en');
+      break;
+      case 'ru':
+      preloadLanguage('ru');
+      break;
+    }
+  }
+
+  if(localStorage.getItem('currentTheme')) {
+    const theme = localStorage.getItem('currentTheme');
+    currentTheme = theme;
+
+    if(currentTheme === 'light') {
+    const onloadThemeSwitcher = document.querySelector('.theme-switcher');
+    onloadThemeSwitcher.src = 'assets/svg/dark-theme.svg';
+    lightThemeFunction();
+    }
+  }
+}
+
+function preloadLanguage (language) {
+  const textElements = document.querySelectorAll('[data-i18n]');
+  textElements.forEach((element) => {
+    element.textContent = `${i18Obj[language][element.dataset.i18n]}`;
+    if(element.placeholder) {
+      element.placeholder = `${i18Obj[language][element.dataset.i18n]}`;
+    }
+  })
+}
