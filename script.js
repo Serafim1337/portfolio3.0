@@ -1,0 +1,461 @@
+import i18Obj from './translate.js';
+
+let currentTheme = 'dark';
+let currentLanguage = 'en';
+
+//!-------------------------------------------------------- adaptive menu functions
+document.querySelector('.burger-menu').addEventListener('click', menuFunction);
+function menuFunction() {
+  document.querySelector('.adaptive-menu').classList.toggle('active');
+ switch (currentTheme) {
+   case 'dark': 
+   document.querySelector('.adaptive-menu-list').classList.toggle('active');
+   break;
+   case 'light': 
+   document.querySelector('.adaptive-menu-list-light').classList.toggle('active');
+   break;
+ }
+  document.querySelector('body').classList.toggle('lock');
+  let element = document.querySelector('#title-id');
+  if(element.classList.contains('hidden')) {
+    titleHideFunction();
+  }
+  else {
+  setTimeout(titleHideFunction,200);
+  }
+}
+
+const menuLinks = document.querySelectorAll('.adaptive-menu-list a');
+menuLinks.forEach((link) => {
+  link.addEventListener('click', menuLinksFunction);
+  link.addEventListener('click', menuFunction);
+})
+
+function menuLinksFunction() {
+  let element = document.querySelector('#menu-id');
+  element.classList.toggle('opened');
+}
+
+//!---------------------------------------------- function hiding section titles while adaptive menu is active
+function titleHideFunction() {
+  document.querySelector('.section-title').classList.toggle('hidden');
+  document.querySelector('.skills-section-content').classList.toggle('menu-view-adaption');
+}
+
+//!------------------------------------------ function closing menu by clicking on free space
+
+document.querySelector('#menu-bg').addEventListener('click', bgHandler);
+
+function bgHandler (event) {
+  if(event.target === document.querySelector('#adaptive-menu-nav')) {
+    menuFunction();
+    document.querySelector('#menu-id').classList.toggle('opened');
+    document.querySelector('#menu-id').setAttribute('area-expanded',false);
+  }
+}
+
+//!----------------------------------------- changing images in portfolio section 
+
+document.querySelector('.button[data-season-type="autumn"]').classList.add('button-active');
+
+(function () {
+  for(let i = 0; i < 6;i++) {
+    let imgSpring = new Image();
+    let imgSummer = new Image();
+    let imgWinter = new Image();
+    imgSpring.src = `assets/img/spring/${i+1}.jpg`;
+    imgSummer.src = `assets/img/summer/${i+1}.jpg`;
+    imgWinter.src = `assets/img/winter/${i+1}.jpg`;
+  }
+
+  const svgThemeSwitcher = new Image();
+  svgThemeSwitcher.src = `assets/svg/dark-theme.svg`;
+
+  const heroBgLight = new Image();
+  heroBgLight.src = `assets/img/hero-bg-light.jpg`;
+
+  const contactsBgLight = new Image();
+  contactsBgLight.src = `assets/img/contacts-bg-light.jpg`;
+})();    //!Immediately Invoked Function (IIFE) to preload all images
+
+const buttons = document.querySelectorAll('.button');
+const portfolioImages = document.querySelectorAll('.portfolio-photo');
+
+for(let button of buttons) {
+  button.addEventListener('click', buttonClickHandler);
+}
+
+function buttonClickHandler(event) {
+
+  if(currentTheme === 'dark') {
+    event.target.classList.add('button-active'); 
+  } else {
+    event.target.classList.add('button-active-light-theme'); 
+
+  }
+  
+  for(let button of buttons) {
+    if(button === event.target) {
+      continue;
+    } else {
+      button.classList.remove('button-active');
+      button.classList.remove('button-active-light-theme');
+    }
+  }
+
+  let imageCounter = 0;
+  let animationDuration;
+
+  for(let image of portfolioImages) {
+    imageCounter++;
+    image.src = `assets/img/${event.target.dataset.seasonType}/${imageCounter}.jpg`;
+    image.classList.add('portfolio-photos-animation');
+    animationDuration = parseFloat(window.getComputedStyle(image).animationDuration) * 1000;
+  }
+
+  setTimeout(removeAnimation, animationDuration);
+}
+
+function removeAnimation () {
+  for(let image of portfolioImages) {
+    image.classList.remove('portfolio-photos-animation');
+  }
+}
+
+//!------------------------------light-dark theme switching
+
+const themeSwitcher = document.querySelector('.theme-switcher');
+
+themeSwitcher.addEventListener('click', themeSwitcherHandler);
+
+function themeSwitcherHandler() {
+
+  if(themeSwitcher.src.includes('light')) {
+    themeSwitcher.src = 'assets/svg/dark-theme.svg';
+   lightThemeFunction();
+    return;
+  } else {
+    themeSwitcher.src = 'assets/svg/light-theme.svg';
+    darkThemeFunction();
+  } 
+
+}
+
+//!---------------------------- function for light theme classes
+
+function lightThemeFunction() {
+
+  currentTheme = 'light';
+
+ 
+  
+  document.body.style.backgroundColor = 'var(--white)';
+
+  document.querySelector('.hero-container').style.backgroundImage = 'url(assets/img/hero-bg-light.jpg)';
+
+  const text = document.querySelectorAll('.text');
+  for(let textElement of text) {
+    textElement.style.color = '#000000';
+  }
+
+  const navList = document.querySelector('.navigation-list') ||document.querySelector('.navigation-list-light');
+  navList.classList.remove('navigation-list');
+  navList.classList.add('navigation-list-light');
+
+  const menuList = document.querySelector('.adaptive-menu-list') || document.querySelector('.adaptive-menu-list-light');
+  menuList.classList.remove('adaptive-menu-list');
+  menuList.classList.add('adaptive-menu-list-light');
+  
+  const burgerMenuLines = document.querySelectorAll('.line');
+  for(let line of burgerMenuLines) {
+    line.style.stroke = 'var(--black)';
+  }
+
+  const switchLang = document.querySelector('.switch-lang') || document.querySelector('.switch-lang-light');
+  switchLang.classList.remove('switch-lang');
+  switchLang.classList.add('switch-lang-light');
+  const switchers  = switchLang.children;
+  for(let elem of switchers) {
+    if(elem.style.color === 'var(--gold)') {
+      elem.style.color = 'var(--white)';
+    }
+  }
+
+  document.querySelector('.logo-image').src = 'assets/png/logo-dark.png';
+  document.querySelector('.logo-image').style.height = '50px';
+
+  const portfolioButtons = document.querySelectorAll('.button');
+  for(let button of portfolioButtons) {
+    button.classList.remove('button');
+    button.classList.add('button-light-theme');
+    if(button.classList.contains('button-active')) {
+      button.classList.remove('button-active');
+      button.classList.add('button-active-light-theme');
+    }
+  }
+
+  document.querySelector('.contacts-container').style.backgroundImage = 'url(assets/img/contacts-bg-light.jpg)';
+  const inputs = document.querySelectorAll('.contacts-input');
+  for(let input of inputs) {
+    input.classList.remove('contacts-input');
+    input.classList.add('contacts-input-light');
+  }
+  const textArea = document.querySelector('.contacts-textarea') ||document.querySelector('.contacts-textarea-light');
+  textArea.classList.remove('contacts-textarea');
+  textArea.classList.add('contacts-textarea-light')
+
+  const socialsImages = document.querySelectorAll('.socials-image');
+  const socials = ['instagram-light','fb-light','twitter-light','pinterest-light'];
+  let i = 0;
+  for(let image of socialsImages) {
+    image.src =`assets/png/${socials[i]}.png`
+    i++;
+  }
+
+  const footer = document.querySelector('.footer') || document.querySelector('.footer-light');
+  footer.classList.remove('footer');
+  footer.classList.add('footer-light');
+}
+
+//!---------------------------- function for dark theme classes
+
+function darkThemeFunction() {
+
+  currentTheme = 'dark';
+
+  document.body.style.backgroundColor = '';
+
+  document.querySelector('.hero-container').style.backgroundImage = '';
+
+  const text = document.querySelectorAll('.text');
+  for(let textElement of text) {
+    textElement.style.color = '';
+  }
+
+  const navList = document.querySelector('.navigation-list-light');
+  navList.classList.remove('navigation-list-light');
+  navList.classList.add('navigation-list');
+
+  const menuList = document.querySelector('.adaptive-menu-list-light');
+  menuList.classList.remove('adaptive-menu-list-light');
+  menuList.classList.add('adaptive-menu-list');
+
+  const burgerMenuLines = document.querySelectorAll('.line');
+  for(let line of burgerMenuLines) {
+    line.style.stroke = '';
+  }
+
+  const switchLang = document.querySelector('.switch-lang-light');
+  switchLang.classList.remove('switch-lang-light');
+  switchLang.classList.add('switch-lang');
+  const switchers  = switchLang.children;
+  for(let elem of switchers) {
+    if(elem.style.color === 'var(--white)') {
+      elem.style.color = 'var(--gold)';
+    }
+  }
+
+  document.querySelector('.logo-image').src = 'assets/png/logo.png';
+  document.querySelector('.logo-image').style.height = '';
+  
+  const portfolioButtons = document.querySelectorAll('.button-light-theme');
+  for(let button of portfolioButtons) {
+    button.classList.remove('button-light-theme');
+    button.classList.add('button');
+    if(button.classList.contains('button-active-light-theme')) {
+      button.classList.remove('button-active-light-theme');
+      button.classList.add('button-active');
+    }
+  }
+  
+  document.querySelector('.contacts-container').style.backgroundImage = 'url(assets/img/contacts-bg.jpg)';
+  const inputs = document.querySelectorAll('.contacts-input-light');
+  for(let input of inputs) {
+    input.classList.remove('contacts-input-light');
+    input.classList.add('contacts-input');
+  }
+  const textArea = document.querySelector('.contacts-textarea-light');
+  textArea.classList.remove('contacts-textarea-light');
+  textArea.classList.add('contacts-textarea')
+
+  const socialsImages = document.querySelectorAll('.socials-image');
+  const socials = ['instagram','fb','twitter','pinterest'];
+  let i = 0;
+  for(let image of socialsImages) {
+    image.src =`assets/png/${socials[i]}.png`
+    i++;
+  }
+
+  const footer = document.querySelector('.footer-light');
+  footer.classList.remove('footer-light');
+  footer.classList.add('footer');
+}
+
+//!-------------------------------- translate language functions
+
+const enLangSwitcher = document.querySelector('#en-lang');
+const ruLangSwitcher = document.querySelector('#ru-lang');
+enLangSwitcher.addEventListener('click', switchLangHandler);
+ruLangSwitcher.addEventListener('click', switchLangHandler);
+
+if(currentTheme === 'light') {
+  switch(currentLanguage) {
+    case 'en': 
+    enLangSwitcher.style.color = 'green';
+    ruLangSwitcher.style.color = '';
+    break;
+    case 'ru': 
+    enLangSwitcher.style.color = '';
+    ruLangSwitcher.style.color = 'green';
+    break;
+  }
+}
+
+function switchLangHandler (event) {
+  switch(event.target.id) {
+   case 'en-lang': 
+   currentLanguage = 'en';
+   getTranslation(currentLanguage);
+
+   switch(currentTheme) {
+    case 'light': 
+    enLangSwitcher.style.color = 'var(--white)';
+    ruLangSwitcher.style.color = '';
+    break;
+    case 'dark': 
+    enLangSwitcher.style.color = 'var(--gold)';
+    ruLangSwitcher.style.color = '';
+    break;
+   }
+   break;
+
+   case 'ru-lang': 
+   currentLanguage = 'ru';
+   getTranslation(currentLanguage);
+
+   switch(currentTheme) {
+    case 'light': 
+    enLangSwitcher.style.color = '';
+    ruLangSwitcher.style.color = 'var(--white)';
+    break;
+    case 'dark': 
+    enLangSwitcher.style.color = '';
+    ruLangSwitcher.style.color = 'var(--gold)';
+    break;
+   }
+
+   break;
+  }
+}
+
+function getTranslation (currentLanguage) {
+  const textElements = document.querySelectorAll('[data-i18n]');
+  textElements.forEach((element) => {
+    element.textContent = `${i18Obj[currentLanguage][element.dataset.i18n]}`;
+    if(element.placeholder) {
+      element.placeholder = `${i18Obj[currentLanguage][element.dataset.i18n]}`;
+    }
+  })
+}
+
+//!--------------------------------- button animation
+
+const animatedButtons = document.querySelectorAll('.animated-button');
+
+for(let button of animatedButtons){
+button.addEventListener('click', animatedButtonHandler);
+}
+
+function animatedButtonHandler(e) {
+  const x = e.clientX;
+  const y = e.clientY;
+
+  const buttonTop = e.target.offsetTop;
+  const buttonLeft = e.target.offsetLeft;
+  
+  const xInside = x - buttonLeft;
+  const yInside = y - buttonTop + window.pageYOffset;
+
+  const circle = document.createElement('span');
+  circle.classList.add('circle');
+  circle.style.top = yInside + 'px';
+  circle.style.left = xInside + 'px';
+
+  this.appendChild(circle);
+  setTimeout(() => circle.remove(), 500);
+}
+
+//!----------------------------- saving user settings in local storage  
+
+window.addEventListener('beforeunload', setLocalStorage);
+window.addEventListener('load', getLocalStorage);
+
+function setLocalStorage () {
+  localStorage.setItem('currentLanguage', currentLanguage);
+  localStorage.setItem('currentTheme', currentTheme);
+}
+
+function getLocalStorage () {
+  if(localStorage.getItem('currentLanguage')) {
+    const lang = localStorage.getItem('currentLanguage');
+    currentLanguage = lang;
+
+    switch(currentLanguage) {
+      case 'en': 
+      preloadLanguage('en');
+      break;
+      case 'ru':
+      preloadLanguage('ru');
+      break;
+    }
+  }
+
+  if(localStorage.getItem('currentTheme')) {
+    const theme = localStorage.getItem('currentTheme');
+    currentTheme = theme;
+
+    if(currentTheme === 'light') {
+    const onloadThemeSwitcher = document.querySelector('.theme-switcher');
+    onloadThemeSwitcher.src = 'assets/svg/dark-theme.svg';
+    lightThemeFunction();
+    }
+  }
+}
+
+function preloadLanguage (language) {
+
+switch(language) {
+  case 'en':
+    switch(currentTheme) {
+      case 'light': 
+      enLangSwitcher.style.color = 'var(--white)';
+      ruLangSwitcher.style.color = '';
+      break;
+      case 'dark': 
+      enLangSwitcher.style.color = 'var(--gold)';
+      ruLangSwitcher.style.color = '';
+      break;
+     }
+  break;
+  case 'ru':
+    switch(currentTheme) {
+      case 'light': 
+      enLangSwitcher.style.color = '';
+      ruLangSwitcher.style.color = 'var(--white)';
+      break;
+      case 'dark': 
+      enLangSwitcher.style.color = '';
+      ruLangSwitcher.style.color = 'var(--gold)';
+      break;
+     }
+  break;
+}
+
+  const textElements = document.querySelectorAll('[data-i18n]');
+  textElements.forEach((element) => {
+    element.textContent = `${i18Obj[language][element.dataset.i18n]}`;
+    if(element.placeholder) {
+      element.placeholder = `${i18Obj[language][element.dataset.i18n]}`;
+    }
+  })
+}
