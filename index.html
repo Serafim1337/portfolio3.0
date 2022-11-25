@@ -7,6 +7,19 @@
   <title>Portfolio</title>
   <link href="style.css" rel="stylesheet">
   <link rel="icon" href="assets/png/favicon.png">
+  <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6380caddb0d6371309d11685/1ginhgsk7';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
 </head>
 <body>
   <header class="header">
@@ -179,14 +192,38 @@ for video, advertising, portfolio</pre>
       </div>
     </section>
 
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+      function timestamp() {
+        var response = document.getElementById("g-recaptcha-response");
+        if (response == null || response.value.trim() == "") {
+          var elems = JSON.parse(
+            document.getElementsByName("captcha_settings")[0].value
+          );
+          elems["ts"] = JSON.stringify(new Date().getTime());
+          document.getElementsByName("captcha_settings")[0].value =
+            JSON.stringify(elems);
+        }
+      }
+      setInterval(timestamp, 500);
+    </script>
+
+
     <section class="contacts-section" id="contacts-id">
       <div class="container contacts-container">
         <div class="contacts-section-content">
+          <form>
           <h2 class="text" data-i18n="contact-me">Contact me</h2>
-          <input type="text" placeholder="E-mail" class="contacts-input">
-          <input type="tel" placeholder="Phone" class="contacts-input" data-i18n="phone">
+          <input type="email" placeholder="E-mail" class="contacts-input" required>
+          <input type="tel" placeholder="Phone" class="contacts-input" data-i18n="phone" required>
           <textarea placeholder="Message" class="contacts-textarea" data-i18n="message"></textarea>
-          <button type="button" class="contacts-button animated-button" data-i18n="send-message">Send message</button>
+          <div
+            class="g-recaptcha"
+            data-sitekey="6LfMF4YfAAAAAFbCSBl3DLEuver-pLXuUeUpuV3_"
+          ></div>
+          <input type="submit" class="contacts-button animated-button" data-i18n="send-message" value="Send message"></input>
+        </form>
         </div>
       </div>
     </section>
@@ -197,7 +234,7 @@ for video, advertising, portfolio</pre>
         <a href="#" target="_blank"><p class="elements elem1">© 2022 github</p></a>
       </div>
       <div class="rs-name">
-        <a href="#" target="_blank"><p class="rs-description">Rolling Scopes School</p></a>
+        <a href="#" target="_blank"><p class="rs-description">Serafim Evtihiev</p></a>
       </div>
       <div class="socials">
         <ul class="socials-list">
